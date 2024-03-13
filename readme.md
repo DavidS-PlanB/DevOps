@@ -1,4 +1,3 @@
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 1. DevOps (Development und Operation) sind Praktiken, sie fördern die Zusammenarbeit zwischen den Devs und den Ops.
  # A first-level heading
 
