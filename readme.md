@@ -1,6 +1,4 @@
-#
-1. DevOps (Development und Operation) sind Praktiken, sie fördern die Zusammenarbeit zwischen den Devs und den Ops.
- # A first-level heading
+1. #DevOps (Development und Operation) sind Praktiken, sie fördern die Zusammenarbeit zwischen den Devs und den Ops.
 
 Continuous Integration (CI): Entwickler integrieren regelmäßig ihren Code in ein gemeinsames Repository, und automatisierte Build- und Testprozesse werden durchgeführt, um die Qualität des Codes sicherzustellen.
 
