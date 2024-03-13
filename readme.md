@@ -1,5 +1,5 @@
 1. #DevOps (Development und Operation) sind Praktiken, sie fördern die Zusammenarbeit zwischen den Devs und den Ops.
-
+#
 Continuous Integration (CI): Entwickler integrieren regelmäßig ihren Code in ein gemeinsames Repository, und automatisierte Build- und Testprozesse werden durchgeführt, um die Qualität des Codes sicherzustellen.
 
 Continuous Deployment (CD): Dieser Ansatz beinhaltet die automatische Bereitstellung von Codeänderungen in einer Produktionsumgebung, sobald sie durch die CI-Prozesse genehmigt wurden.
