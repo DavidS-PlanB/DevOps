@@ -1,0 +1,72 @@
+name: Deploy Bicep file
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Log into Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Check if userstory1.bicep exists
+        id: check_userstory1
+        run: |
+          if [ -f ./DevOps/Userstory1/userstory1.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
+
+      - name: Deploy Bicep file 1
+        run: |
+          if [[ $(echo "${{ steps.check_userstory1.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/Userstory1/userstory1.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/Userstory1/userstory1.bicep --parameters location=westeurope
+          fi
+
+      - name: Check if Userstory2.bicep exists
+        id: check_userstory2
+        run: |
+          if [ -f ./DevOps/Userstory2/userStoryTwo.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
+
+      - name: Deploy Bicep file 2
+        run: |
+          if [[ $(echo "${{ steps.check_userstory2.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/UserStory2/userStoryTwo.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/UserStory2/userStoryTwo.bicep --parameters location=westeurope
+          fi
+
+      - name: Check if Userstory3.bicep exists
+        id: check_userstory3
+        run: |
+          if [ -f ./DevOps/UserStory3/userStoryTwo.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
+
+      - name: Deploy Bicep file 3
+        run: |
+          if [[ $(echo "${{ steps.check_userstory3.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/UserStory3/userStoryTwo.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./DevOps/UserStory3/userStoryTwo.bicep --parameters location=westeurope
+          fi
