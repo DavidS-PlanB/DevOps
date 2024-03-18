@@ -21,7 +21,7 @@ resource blobStorage 'Microsoft.Storage/storageAccounts/blobServices/containers@
   parent : blobServices
 
   properties: {
-    accessTier: 'Hot'
+    
     metadata : {}
   }
 }
