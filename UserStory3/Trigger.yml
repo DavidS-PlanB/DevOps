@@ -64,4 +64,4 @@ jobs:
       - script: |
           echo 'Deploying to Azure...'
           # Befehl zum Deployment in Azure hier einfügen
-        displayName: 'Deploy to Azure
+        displayName: 'Deploy to Azure'
