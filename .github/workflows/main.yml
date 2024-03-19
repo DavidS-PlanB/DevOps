@@ -20,7 +20,7 @@ jobs:
       - name: Check if Userstory3.bicep exists
         id: check_userstory3
         run: |
-          if [ -f ./home/runner/work/DevOps/Userstory3/userStoryTwo.bicep ]; then
+          if [ -f ./Userstory3/userStoryTwo.bicep ]; then
             echo "exists"
           else
             echo "not_exists"
@@ -30,7 +30,7 @@ jobs:
       - name: Deploy Bicep file 3
         run: |
           if [[ $(echo "${{ steps.check_userstory3.outputs }}" | tr -d '\r\n') == "exists" ]]; then
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./home/runner/work/DevOps/Userstory3/userStoryTwo.bicep --parameters location=westeurope --mode complete
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory3/userStoryTwo.bicep --parameters location=westeurope --mode complete
           else
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./home/runner/work/DevOps/Userstory3/userStoryTwo.bicep --parameters location=westeurope
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory3/userStoryTwo.bicep --parameters location=westeurope
           fi
