@@ -30,12 +30,10 @@ jobs:
 
         Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
 
-    # Validate Bicep files
+      # Validate bicep-data
     - name: Validate Bicep files
       run: |
-        for file in *.bicep; do
-          az bicep build -f $file --out
-        done
+       az bicep build -f *.bicep --out
       
     # Execute PowerShell script
     - name: Execute PowerShell Script
