@@ -1,12 +1,12 @@
 @description('Define the project name or prefix for all objects.')
 @minLength(1)
-param demoName string = 'davidschaefer'
+param demoName string = 'david'
 
 @description('The datacenter to use for the deployment.')
 param location string = 'germanywestcentral'
 
 @description('The SKU to use for the IoT Hub.')
-param skuName string = 'F1'
+param skuName string = 'B1'
 
 @description('The number of IoT Hub units.')
 param skuUnits int = 1
