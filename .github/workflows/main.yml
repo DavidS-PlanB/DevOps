@@ -32,15 +32,13 @@ jobs:
           Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
     
     - name: Deploy to Azure
-      run: 
-           |
       shell: pwsh
+        
+        az group deployment create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters "C:\Users\David.Schaefer\DevOps\UserStory3\parameters.test.json"
       
-        az group deployment create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters C:\Users\David.Schaefer\DevOps\UserStory3\parameters.prod.json
-
-     
-          
-
+      run: |
+          "<1st script's absolute path>"
+          "<2st script's absolute path>"
 
 #This command will output a JSON object containing the service principal credentials, including clientId, clientSecret, subscriptionId, and tenantId.
 #az ad sp create-for-rbac --name secretJustin --sdk-auth
