@@ -25,4 +25,4 @@ jobs:
     
     - name: Deploy to Azure
       run: |
-        az group deployment create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters C:\Users\David.Schaefer\DevOps\UserStory3\parameters.prod.json
+        az deployment group create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters C:\Users\David.Schaefer\DevOps\UserStory3\parameters.prod.json
