@@ -25,13 +25,15 @@ jobs:
         CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
         TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         
-    # Uninstall AzureRm module
-    - name: Uninstall AzureRm module
-      run: Uninstall-Module -Name AzureRm -Force -ErrorAction SilentlyContinue
-
+    
     # Install packages that are needed for the deployment
     - name: Install Azure PowerShell module
       run: Install-Module -Name Az -Force -AllowClobber
+
+      # Uninstall AzureRm module
+    - name: Uninstall AzureRm module
+      run: Uninstall-Module -Name AzureRm -Force -ErrorAction SilentlyContinue
+
 
     # Connecting to Azure
     - name: Login to Azure
