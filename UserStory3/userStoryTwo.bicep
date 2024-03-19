@@ -1,6 +1,6 @@
 @description('Define the project name or prefix for all objects.')
 @minLength(1)
-param demoName string = 'david'
+param demoName string = 'WS9824'
 
 @description('The datacenter to use for the deployment.')
 param location string = 'germanywestcentral'
@@ -131,7 +131,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2023-01-01' = {
   name: hostingPlanName
   location: location
   sku: {
-    name: 'F1'
+    name: 'B1'
     tier: 'Dynamic'
   }
   properties: {}
@@ -193,4 +193,4 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
     Request_Source: 'rest'
   }
 }
-//dihsidh
+//dihsidhdasdasd
