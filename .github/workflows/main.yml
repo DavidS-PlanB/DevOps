@@ -13,7 +13,16 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-
+  # Display service principal details
+    - name: Display Service Principal Details
+      run: |
+        echo "Client ID: $CLIENT_ID"
+        echo "Client Secret: $CLIENT_SECRET"
+        echo "Tenant ID: $TENANT_ID"
+      env:
+        CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
     # Install packages that are needed for the deployment
     - name: Install Azure PowerShell module
       run: Install-Module -Name Az -Force -AllowClobber
@@ -26,7 +35,6 @@ jobs:
           clientSecret   = "${{ secrets.AZURE_CLIENT_SECRET }}"
           tenantId       = "${{ secrets.AZURE_TENANT_ID }}"
         }
-        $servicePrincipal User.all
         $credential = New-Object -TypeName PSCredential -ArgumentList $servicePrincipal.clientId, $(ConvertTo-SecureString -String $servicePrincipal.clientSecret -AsPlainText -Force)
 
         Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
