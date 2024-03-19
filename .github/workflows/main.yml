@@ -33,8 +33,11 @@ jobs:
       # Uninstall AzureRm module
     - name: Uninstall AzureRm module
       run: Uninstall-Module -Name AzureRm -Force -ErrorAction SilentlyContinue
-
-
+   
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
     # Connecting to Azure
     - name: Login to Azure
       run: |
