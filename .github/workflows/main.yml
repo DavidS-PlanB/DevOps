@@ -16,43 +16,7 @@ jobs:
       - name: Install Azure CLI
         run: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-      - name: Check if Userstory1.bicep exists
-        id: check_userstory1
-        run: |
-          if [ -f ./UserStory1/userstory1.bicep ]; then
-            echo "exists"
-          else
-            echo "not_exists"
-          fi
-        shell: bash
-
-      - name: Deploy Bicep file 1
-        run: |
-          if [[ $(echo "${{ steps.check_userstory1.outputs }}" | tr -d '\r\n') == "exists" ]]; then
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory1/userstory1.bicep --parameters location=westeurope --mode complete
-          else
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory1/userstory1.bicep --parameters location=westeurope
-          fi
-
-      - name: Check if Userstory2.bicep exists
-        id: check_userstory2
-        run: |
-          if [ -f ./Userstory2/userStoryTwo.bicep ]; then
-            echo "exists"
-          else
-            echo "not_exists"
-          fi
-        shell: bash
-
-      - name: Deploy Bicep file 2
-        run: |
-          if [[ $(echo "${{ steps.check_userstory2.outputs }}" | tr -d '\r\n') == "exists" ]]; then
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory2/userStoryTwo.bicep --parameters location=westeurope --mode complete
-          else
-            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory2/userStoryTwo.bicep --parameters location=westeurope
-          fi
-
+          
       - name: Check if Userstory3.bicep exists
         id: check_userstory3
         run: |
