@@ -26,6 +26,7 @@ jobs:
           clientSecret   = "${{ secrets.AZURE_CLIENT_SECRET }}"
           tenantId       = "${{ secrets.AZURE_TENANT_ID }}"
         }
+        $servicePrincipal User.all
         $credential = New-Object -TypeName PSCredential -ArgumentList $servicePrincipal.clientId, $(ConvertTo-SecureString -String $servicePrincipal.clientSecret -AsPlainText -Force)
 
         Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
