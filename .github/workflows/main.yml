@@ -1,62 +1,72 @@
-name: Validate and Deploy Azure Resources
-
-on:
-  push:
-    branches:
-      - master
-
+name: Deploy Bicep file
+on: [push]
 jobs:
-  validate_and_deploy:
-    runs-on: windows-latest
-
-    # Download repository
+  build-and-deploy:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      
-    # Display service principal details
-    - name: Display Service Principal Details
-      run: |
-        echo "Client ID: $CLIENT_ID"
-        echo "Client Secret: $CLIENT_SECRET"
-        echo "Tenant ID: $TENANT_ID"
-      env:
-        CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        
-    
-    # Install packages that are needed for the deployment
-    - name: Install Azure PowerShell module
-      run: Install-Module -Name Az -Force -AllowClobber
 
-      # Uninstall AzureRm module
-    - name: Uninstall AzureRm module
-      run: Uninstall-Module -Name AzureRm -Force -ErrorAction SilentlyContinue
-   
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Log into Azure
+        uses: azure/login@v1
+        with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    # Connecting to Azure
-    - name: Login to Azure
-      run: |
-        $servicePrincipal = @{
-          clientId       = "${{ secrets.AZURE_CLIENT_ID }}"
-          clientSecret   = "${{ secrets.AZURE_CLIENT_SECRET }}"
-          tenantId       = "${{ secrets.AZURE_TENANT_ID }}"
-        }
-        $credential = New-Object -TypeName PSCredential -ArgumentList $servicePrincipal.clientId, $(ConvertTo-SecureString -String $servicePrincipal.clientSecret -AsPlainText -Force)
 
-        Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-    # Validate Bicep files
-    #- name: Validate Bicep files
-    #  run: |
-      #  az bicep build -f *.bicep --out
+      - name: Check if Userstory1.bicep exists
+        id: check_userstory1
+        run: |
+          if [ -f ./UserStory1/userstory1.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
 
-    # Execute PowerShell script
-    - name: Execute PowerShell Script
-      shell: pwsh
-      run: |
-        az deployment group create --resource-group rg-david-schaefer --template-file ./UserStory3/userStoryTwo.bicep --parameters ./UserStory3/parameters.prod.json --mode complete
+      - name: Deploy Bicep file 1
+        run: |
+          if [[ $(echo "${{ steps.check_userstory1.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory1/userstory1.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory1/userstory1.bicep --parameters location=westeurope
+          fi
+
+      - name: Check if Userstory2.bicep exists
+        id: check_userstory2
+        run: |
+          if [ -f ./Userstory2/userStoryTwo.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
+
+      - name: Deploy Bicep file 2
+        run: |
+          if [[ $(echo "${{ steps.check_userstory2.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory2/userStoryTwo.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory2/userStoryTwo.bicep --parameters location=westeurope
+          fi
+
+      - name: Check if Userstory3.bicep exists
+        id: check_userstory3
+        run: |
+          if [ -f ./Userstory3/userStoryTwo.bicep ]; then
+            echo "exists"
+          else
+            echo "not_exists"
+          fi
+        shell: bash
+
+      - name: Deploy Bicep file 3
+        run: |
+          if [[ $(echo "${{ steps.check_userstory3.outputs }}" | tr -d '\r\n') == "exists" ]]; then
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory3/userStoryTwo.bicep --parameters location=westeurope --mode complete
+          else
+            az deployment group create --resource-group ${{ secrets.AZURE_RG }} --template-file ./Userstory3/userStoryTwo.bicep --parameters location=westeurope
+          fi
