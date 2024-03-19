@@ -25,7 +25,7 @@ resource blobStorage 'Microsoft.Storage/storageAccounts/blobServices/containers@
     metadata : {}
   }
 }
-//dashdiashdoisadsdf
+//dashdiashdoisadsdfkjok
 //dsifewoiufewiu<sddsf
 //Test commentcyxc
 //RESOURCE BLOBSERVICESdasdsa 'MIiuCROSOFT.STORAGE/STORAGEACCOUNTS/BLOBSERVICES@2023-01-01' = NAME: 'DEFAULT' PARENT: EXAMPLESTORAGE RESOURCE CONTAINER 'MICROSOFT.STORAGE/STORAGEACCOUNTS/BLOBSERVICES/CONTAINERS@2023-01-01' = NAME: STORAGENAME PARENT: BLOBSERVICES PROPERTIES: PUBLICACCESS: 'NONE' METADATA:
