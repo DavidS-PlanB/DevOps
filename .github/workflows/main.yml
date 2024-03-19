@@ -18,7 +18,7 @@ jobs:
     - name: Install Azure PowerShell module
       run: Install-Module -Name Az -Force -AllowClobber
 
-    # Connecting to azure
+    # Connecting to Azure
     - name: Login to Azure
       run: |
         $servicePrincipal = @{
@@ -30,15 +30,15 @@ jobs:
 
         Connect-AzAccount -ServicePrincipal -Credential $credential -Tenant $servicePrincipal.tenantId
 
-
-- name: Validate Bicep files
-  run: |
-    for file in *.bicep; do
-      az bicep build -f $file --out
-    done
-
-    # Execute powershell script
+    # Validate Bicep files
+    - name: Validate Bicep files
+      run: |
+        for file in *.bicep; do
+          az bicep build -f $file --out
+        done
+      
+    # Execute PowerShell script
     - name: Execute PowerShell Script
       shell: pwsh
       run: |
-      az deployment group create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters C:\Users\David.Schaefer\DevOps\UserStory3\parameters.prod.json
+        az deployment group create --resource-group rg-david-schaefer --template-file UserStory3/userStoryTwo.bicep --parameters UserStory3/parameters.prod.json
