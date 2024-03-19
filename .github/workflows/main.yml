@@ -34,7 +34,7 @@ jobs:
     - name: Deploy to Azure
       shell: pwsh
         
-        az group deployment create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters "C:\Users\David.Schaefer\DevOps\UserStory3\parameters.test.json"
+        az group deployment create --resource-group rg-david-schaefer --template-file C:\Users\David.Schaefer\DevOps\UserStory3\userStoryTwo.bicep --parameters C:\Users\David.Schaefer\DevOps\UserStory3\parameters.test.json
       
       run: |
           "<1st script's absolute path>"
